@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>CloudBit Output Test</h2>
+<button type="button" onclick="sendoutput()">Send Output</button>
+<br>
+<pre>
+Output Time (ms): <input type="text" id="duration" value="-1"/> (constant = -1)</br>
+Output Value	: <input type="text" id="thevalue" value="80"/> (percent 0-100)</br> 
+</pre>
+<p id="demo"></p>
+<script>
+
+function sendoutput() {
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.open("POST", "https://api-http.littlebitscloud.cc/devices/00e04c0379bb/output?", true);
+	xhttp.setRequestHeader("Accept","application/vnd.littlebits.v2+json");
+	// change to your Auth Token
+	xhttp.setRequestHeader("Authorization", "Bearer 4f3830b44e1d4b27xxxx");
+	xhttp.setRequestHeader("Content-Type","application/json");
+
+	var duration = document.getElementById("duration").value;
+	var thevalue = document.getElementById("thevalue").value;
+
+	var params = JSON.stringify({duration_ms: duration,percent: thevalue});
+
+	xhttp.onreadystatechange = function() {
+		document.getElementById("demo").innerHTML = "Result=" +xhttp.responseText;
+	}
+
+	xhttp.send(params);
+}
+</script>
+
+</body>
+</html>

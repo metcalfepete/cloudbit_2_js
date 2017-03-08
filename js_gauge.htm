@@ -1,0 +1,61 @@
+<html>
+  <head>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+	  var littleBitinput = 0;
+      google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['littleBits', 100],
+        ]);
+
+        var options = { 
+          width: 600, height: 600,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+		  greenFrom: 60, greenTo: 75,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+		  get_input();
+          data.setValue(0, 1, littleBitinput);
+          chart.draw(data, options);
+        }, 500);
+ 
+      }
+	  function get_input() {
+	  // change to your deviceid and authtoken
+		  var deviceid = "00e04c0379bb";
+		  var authtoken = "4f3830b44e1d4b27xxx";
+		  var theurl = "https://api-http.littlebitscloud.cc/devices/";		  
+		  var xhttp = new XMLHttpRequest();
+		  
+		  xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 3 ) {
+				var datapackage = xhttp.responseText.split("\n\ndata:");
+				var lb_data = JSON.parse( datapackage[1] );		 
+				littleBitinput =  lb_data.percent;
+				xhttp.open("GET","",true);
+				xhttp.send();
+			}
+		  }
+		  xhttp.open("GET", theurl + deviceid + "/input", true);
+		  xhttp.setRequestHeader("Accept","application/vnd.littlebits.v2+json");
+		  xhttp.setRequestHeader("Authorization", "Bearer " + authtoken);
+		  xhttp.send();
+
+}
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 600px; height: 600px;"></div>
+  </body>
+</html>
