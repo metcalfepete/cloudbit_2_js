@@ -20,6 +20,7 @@ To get started creating littleBits Cloud API applications, you will need to get:
 To get find you Device ID and AccessToken log into [http://littlebits.cc/](http://littlebits.cc/) and on the top right side of the screen select the “Cloud Control” menu item. Then select the “Settings” icon at the bottom of the page. 
 
 At the bottom of the “Settings” page the Device ID and AccessToken will be shown.
+
 ![alt text](bit_info.bmp)
 
 There are a number of different calls that are available with the littleBits Cloud HTTP API. Unlike a standard call to a Web page, the Cloud HTTP API requires some extra parameters. These extra parameter are included in the header definition of the HTTP request. The most important header item is the littleBits authorization token. A version item can also be defined through the “Accept” header item.
@@ -123,22 +124,14 @@ function sendoutput() {
 </body>
 </html>
 ```
-#js_gauge.htm - show a Cloudbit input on a real time gauge
+#js_gauge.htm - show an input on a real time gauge
 ![alt text](js_gauge.png)
 
 The gauge example is uses:
 * AJAX to get updates on the Cloudbits input value
 * Google Charts for the gauge component
 
-#js_chart2.htm__ - show a Cloudbit input on a real time chart
+#js_chart2.htm - show an input on a real time chart
 ![alt text](lb_chart2.png)
 
 This example uses smoothie charts [http://smoothiecharts.org/](http://smoothiecharts.org/) for the real time charts
-
-
-
-
-
-
-
-
