@@ -31,7 +31,31 @@ The Cloudbit API reference can be found at : [http://developers.littlebitscloud.
 #js_status.htm - show the Cloudbit device status
 ![alt text](js_status.png)
 
-This is a simple "one time read" of the name and status of a CloudBit. 
+This is a simple "one time read" of the name and status of a CloudBit. The basic Javascript code to setup the REST API get and then to parse the response is below.
+
+```javascript
+var xhttp = new XMLHttpRequest();
+// update with your token information
+var authtoken = "4f3830b44e1d4b27xxx";
+var theURL =  "https://api-http.littlebitscloud.cc/devices/";
+xhttp.open("GET", theURL, true);
+xhttp.setRequestHeader("Accept","application/vnd.littlebits.v2+json");
+xhttp.setRequestHeader("Authorization", "Bearer " + authtoken);
+
+xhttp.onreadystatechange = function() {
+	
+	if (xhttp.readyState == 4 ) { // when the response is complete get the data
+		// remove leading "[" and trailing ']'
+		var theresponse = xhttp.responseText.substring(1, xhttp.responseText.length -1);
+		var lb_data = JSON.parse( theresponse );	
+		
+		document.getElementById('LB_label').innerText =  lb_data.label;
+		document.getElementById('is_connected').innerHTML = lb_data.is_connected;
+	}
+}
+
+xhttp.send();
+```
 
 #js_in.htm - read Cloudit input
 ![alt text](js_in.png)
