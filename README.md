@@ -26,8 +26,11 @@ There are a number of different calls that are available with the littleBits Clo
 
 The Cloudbit API reference can be found at : [http://developers.littlebitscloud.cc/#devices](http://developers.littlebitscloud.cc/#devices)
 
+
 #js_status.htm - show the Cloudbit device status
 ![alt text](js_status.png)
+
+This is a simple "one time read" of the name and status of a CloudBit. 
 
 #js_in.htm - read Cloudit input
 ![alt text](js_in.png)
@@ -75,6 +78,62 @@ The value : <font id="thevalue"> XXXX </font>
 </body>
 </html>
 ```
+
+#js_out2.htm - send an output and the duration of the output to a Cloudbit
+![alt text](in_out2.png)
+
+This example will output the value (0-100) and the pulse duration in milliseconds. For a constant output use a duration of -1. Below is the example code.
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+<h2>CloudBit Output Test</h2>
+<button type="button" onclick="sendoutput()">Send Output</button>
+<br>
+<pre>
+Output Time (ms): <input type="text" id="duration" value="-1"/> (constant = -1)</br>
+Output Value	: <input type="text" id="thevalue" value="80"/> (percent 0-100)</br> 
+</pre>
+<p id="demo"></p>
+<script>
+
+function sendoutput() {
+	var xhttp = new XMLHttpRequest();
+
+	xhttp.open("POST", "https://api-http.littlebitscloud.cc/devices/00e04c0379bb/output?", true);
+	xhttp.setRequestHeader("Accept","application/vnd.littlebits.v2+json");
+	// change to your Auth Token
+	xhttp.setRequestHeader("Authorization", "Bearer 4f3830b44e1d4b27xxxx");
+	xhttp.setRequestHeader("Content-Type","application/json");
+
+	var duration = document.getElementById("duration").value;
+	var thevalue = document.getElementById("thevalue").value;
+
+	var params = JSON.stringify({duration_ms: duration,percent: thevalue});
+
+	xhttp.onreadystatechange = function() {
+		document.getElementById("demo").innerHTML = "Result=" +xhttp.responseText;
+	}
+
+	xhttp.send(params);
+}
+</script>
+
+</body>
+</html>
+```
+#js_gauge.htm - show a Cloudbit input on a real time gauge
+![alt text](js_gauge.png)
+
+The gauge example is uses:
+* AJAX to get updates on the Cloudbits input value
+* Google Charts for the gauge component
+
+#js_chart2.htm__ - show a Cloudbit input on a real time chart
+![alt text](lb_chart2.png)
+
+This example uses smoothie charts [http://smoothiecharts.org/](http://smoothiecharts.org/) for the real time charts
 
 
 
