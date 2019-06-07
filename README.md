@@ -11,7 +11,7 @@ The examples are:
 * __js_chart2.htm__ - show a Cloudbit input on a real time chart
 
 
-#Introduction
+# Introduction
 
 To get started creating littleBits Cloud API applications, you will need to get:
 1. littleBits Device ID – this is a unique identifier for each littleBits Cloud bit device
@@ -28,7 +28,7 @@ There are a number of different calls that are available with the littleBits Clo
 The Cloudbit API reference can be found at : [http://developers.littlebitscloud.cc/#devices](http://developers.littlebitscloud.cc/#devices)
 
 
-#js_status.htm - show the Cloudbit device status
+# js_status.htm - show the Cloudbit device status
 ![alt text](js_status.png)
 
 This is a simple "one time read" of the name and status of a CloudBit. The basic Javascript code to setup the REST API get and then to parse the response is below.
@@ -57,7 +57,7 @@ xhttp.onreadystatechange = function() {
 xhttp.send();
 ```
 
-#js_in.htm - read Cloudit input
+# js_in.htm - read Cloudit input
 ![alt text](js_in.png)
 
 The inputs from the CloudBit API are streamed to the client. This can be a little messy if the client application is only expecting a single value. Using the statement: _xhttp.readyState == 3_ will allow the application to catch the first stream of data.
@@ -104,7 +104,7 @@ The value : <font id="thevalue"> XXXX </font>
 </html>
 ```
 
-#js_out2.htm - send an output and the duration of the output to a Cloudbit
+# js_out2.htm - send an output and the duration of the output to a Cloudbit
 ![alt text](in_out2.png)
 
 This example will output the value (0-100) and the pulse duration in milliseconds. For a constant output use a duration of -1. Below is the example code.
@@ -148,14 +148,14 @@ function sendoutput() {
 </body>
 </html>
 ```
-#js_gauge.htm - show an input on a real time gauge
+# js_gauge.htm - show an input on a real time gauge
 ![alt text](js_gauge.png)
 
 The gauge example is uses:
 * AJAX to get updates on the Cloudbits input value
 * Google Charts for the gauge component
 
-#js_chart2.htm - show an input on a real time chart
+# js_chart2.htm - show an input on a real time chart
 ![alt text](lb_chart2.png)
 
 This example uses smoothie charts [http://smoothiecharts.org/](http://smoothiecharts.org/) for the real time charts
